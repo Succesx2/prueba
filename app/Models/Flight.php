@@ -18,7 +18,7 @@ class Flight extends Model
 
     public function captain()
     {
-        return $this->hasOne(Captain::class, 'flight_id', 'id');
+        return $this->hasMany(Captain::class, 'flight_id', 'id');
     }
 
     public function reservations()

@@ -25,10 +25,12 @@ class AirplaneController extends Controller
 
         $airplane_id = $request->input('airplane_id') ?? 0;
 
+        $random_code = "cod-" . str_random(4);
+
         if ($airplane_id == 0){
 
             $airplane = new Airplane();
-
+            $airplane->code = 'cod-'. str_random(4);
         } else{
             $airplane = Airplane::findOrFail($airplane_id);
         }
@@ -36,6 +38,7 @@ class AirplaneController extends Controller
 
         $airplane_data['airplane'] = $airplane;
         $airplane_data['airlines'] = $airlines;
+        $airplane_data['random_code'] = $random_code;
         $data['body'] = view('airplane.ce_airplane')->with($airplane_data)->render();
         return $data;
     }
@@ -90,10 +93,10 @@ class AirplaneController extends Controller
 
         if ($airplane_id == 0 ) {
             $airplane =  Airplane::create($request->all());
+            $airplane->code = 'COD-'. str_random(4);
         } else {
             $airplane = Airplane::findOrFail($airplane_id);
             $airplane->update($request->all());
-            $airplane->code($code);
         }
 
         $airplane->save();
@@ -107,13 +110,5 @@ class AirplaneController extends Controller
         $airplane = Airplane::findOrFail($airplane_id);
         $airplane->update(['is_delete' => true]);
         return response()->json(['success' => "se elimino con exito"], 201);
-    }
-
-    public function restore_airplane(Request $request)
-    {
-        $airplane_id = $request->input('airplane_id');
-        $airplane = Airplane::findOrFail($airplane_id);
-        $airplane->update(['is_delete' => false]);
-        return response()->json(['success' => "se restauro con exito"], 201);
     }
 }

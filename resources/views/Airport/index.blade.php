@@ -28,6 +28,15 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
 
                 </div>
+                <div class="col-3">
+                    <select name="country_id" class="form-control" >
+                        <option value="0">Seleccionar</option>
+                        @foreach($countries as $country)
+                            <option value="{{$country->id}}">{{$country->name ?? ''}}</option>
+                        @endforeach
+                    </select>
+
+                </div>
 
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>

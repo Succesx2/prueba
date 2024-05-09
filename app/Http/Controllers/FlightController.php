@@ -29,10 +29,13 @@ class FlightController extends Controller
 
         $flight_id = $request->input('flight_id') ?? 0;
 
+        $random_code = "cod-" . str_random(4);
+
+
         if ($flight_id == 0){
 
             $flight = new Flight();
-
+            $flight->code = 'COD-' . str_random(4);
         } else{
             $flight = Flight::findOrFail($flight_id);
         }
@@ -42,6 +45,7 @@ class FlightController extends Controller
         $flight_data['airlines'] = $airlines;
         $flight_data['airplanes'] = $airplanes;
         $flight_data['airports'] = $airports;
+        $flight_data['random_code'] = $random_code;
         $data['body'] = view('flight.ce_flight')->with($flight_data)->render();
         return $data;
     }
@@ -58,9 +62,9 @@ class FlightController extends Controller
         foreach ($flights as $flight){
             $is_full = "";
             if($flight->is_full == 0){
-                $is_full = "Vacio";
+                $is_full = "Tiene Espacio";
             } elseif($flight->is_full == 1){
-                $is_full = "Tiene Espacio";}
+                $is_full = "Lleno";}
 
             $flights->is_full = $is_full;}
 
@@ -104,7 +108,13 @@ class FlightController extends Controller
         } else {
             $flight_id = Flight::findOrFail($flight_id);
             $flight_id->update($request->all());
-        }
+        }//if ($flight_id->max_seats = $flight_id->reserved_seats) {
+        //$flight_id->update(["is_full" => 1]);
+         //} else {
+        //$flight_id->update(["is_full" => 0]);
+
+
+
         return response()->json(['success' => 'se actualizo con exito'], 201);
     }
 

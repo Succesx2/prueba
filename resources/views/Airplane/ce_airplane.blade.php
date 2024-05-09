@@ -5,7 +5,7 @@
         <input type="hidden" name="id" value="{{$airplane->id ?? 0}}">
         <div>
             <label>CODIGO</label>
-            <input type="text" name="code" class="form-control" value="{{$airplane->code ?? ''}}">
+            <input type="text" name="code" class="form-control" value="{{$random_code ?? ''}}">
             <br>
             @error('code')
             @enderror

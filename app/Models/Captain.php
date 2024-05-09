@@ -11,6 +11,6 @@ class Captain extends Model
 
     public function flight()
     {
-        return $this->belongsTo(Flight::class, 'id', 'flight_id');
+        return $this->hasOne(Flight::class, 'id', 'flight_id');
     }
 }

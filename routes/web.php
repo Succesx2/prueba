@@ -56,3 +56,11 @@ Route::controller(\App\Http\Controllers\FlightController::class)->group(function
     Route::post('/flight-delete', 'delete_flight');
     Route::post('/flight-restore', 'restore_flight');
 });
+Route::controller(\App\Http\Controllers\CaptainController::class)->group(function() {
+    Route::get('/captains', 'index');
+    Route::get('/captain-deleted', 'captains_deleted');
+    Route::post('/view_ce_captain', 'view_ce_captain');
+    Route::post('/get-captains', 'get_captains');
+    Route::post('/captain-edit', 'ce_captain');
+    Route::post('/captain-delete', 'delete_captain');
+});

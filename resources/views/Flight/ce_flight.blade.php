@@ -38,17 +38,16 @@
             @error('max_seats')
             @enderror
         </div>
-        <div>
+        {{--<div>
             <label>Reservados asientos</label>
             <input type="number" name="reserved_seats" class="form-control" value="{{$flight->reserved_seats ?? ''}}">
             <br>
             @error('reserved_seats')
             @enderror
-        </div>
-
+        </div>--}}
         <div>
             <label>Codigo</label>
-            <input type="text" name="code" class="form-control" value="{{$flight->code ?? ''}}">
+            <input type="text" name="code" class="form-control" value="{{$random_code ?? ''}}">
             <br>
             @error('code')
             @enderror
@@ -77,17 +76,6 @@
                 @endforeach
             </select>
             @error('airplane_id')
-            @enderror
-        </div>
-
-        <div class="form-group mb-3">
-            <label>Capacidad</label>
-            <select name="is_full" class="form-control">
-                <option value="">Seleccionar</option>
-                    <option value="0">Vacio</option>
-                    <option value="1">Tiene Espacio</option>
-            </select>
-            @error('is_full')
             @enderror
         </div>
 
